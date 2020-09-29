@@ -14,15 +14,16 @@ export default class Product extends Component {
         <div className='card'>
           <ProductConsumer>
             {(value) => (
-              <div className='img-container p-5' onClick={() => value.handleDetail(id)}>
+              <div className='img-container p-5'>
               <Link to='/details'>
-                <img src={img} alt='product' className='card-img-top'/>
+                <img onClick={() => value.handleDetail(id)} src={img} alt='product' className='card-img-top'/>
               </Link>
               <button className='cart-btn' disabled={inCart ? true : false} onClick={() => {
-                value.addToCart(id)
+                console.log('cart clicked')
                 value.openModal(id)
+                value.addToCart(id)
               }}>
-                {inCart ? (<p className='text-capitalize mb-0' disabled>in Cart</p>) : (<i className='fas fa-cart-plus'></i>)}
+                {inCart ? (<i className='text-capitalize mb-0' disabled>in Cart</i>) : (<i className='fas fa-cart-plus'></i>)}
               </button>
               </div>
             )}
@@ -88,6 +89,7 @@ const ProductWrapper = styled.div`
     border-radius: 0.5rem 0 0 0;
     transform: translate(100%, 100%);
     transition: all 1s linear;
+    cursor: pointer;
   }
   .img-container:hover .cart-btn {
     transform: translate(0, 0);
